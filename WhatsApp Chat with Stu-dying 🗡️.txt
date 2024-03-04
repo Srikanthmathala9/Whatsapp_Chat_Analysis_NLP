@@ -1,0 +1,554 @@
+11/8/23, 9:54 PM - Abhishek MU: IMG-20231108-WA0017.jpg (file attached)
+11/8/23, 9:54 PM - Abhishek MU: IMG-20231108-WA0016.jpg (file attached)
+11/8/23, 9:55 PM - Heshhhhhh: euuu chimtuu
+11/8/23, 11:48 PM - Srikanth: IMG-20231108-WA0024.jpg (file attached)
+11/9/23, 5:16 AM - Heshhhhhh: scheduling os.pdf (file attached)
+11/9/23, 5:17 AM - Heshhhhhh: ..
+11/9/23, 7:57 AM - Abhishek MU: Multi threading, race conditiona lo problems vunnaya?
+11/9/23, 8:06 AM - Heshhhhhh: No just theory ig
+11/9/23, 8:06 AM - Heshhhhhh: Aa step to step minor pdf lo chudu
+11/9/23, 8:08 AM - Abhishek MU: Ok
+11/9/23, 9:23 AM - Heshhhhhh: https://youtu.be/hyQz97Jym_w?si=7nqH0q3O9xdAWsTR
+11/9/23, 9:53 AM - Srikanth: OS_Full_Notes.pdf (file attached)
+OS LoveB
+11/9/23, 12:25 PM - Vasundhara Reddy: Vasundhara Kandadi_Se21uari062_CN LITE ASSIGNMENT 2.pdf (file attached)
+Vasundhara Kandadi_Se21uari062_CN LITE ASSIGNMENT 2.pdf
+11/9/23, 3:43 PM - Heshhhhhh: IMG-20231109-WA0014.jpg (file attached)
+Thank you for your understanding
+11/9/23, 3:47 PM - Srikanth: Abba asal nenu attenpt cheste ne kada
+11/9/23, 3:57 PM - Heshhhhhh: 🔪🔪🔪
+11/9/23, 3:58 PM - Srikanth: Ante rasa w=0
+11/9/23, 3:58 PM - Srikanth: Y=1
+11/9/23, 3:58 PM - Srikanth: Ala edo edo numbers fill chesa
+11/9/23, 3:58 PM - Heshhhhhh: Attempt chesav ga inka lite
+11/9/23, 3:59 PM - Heshhhhhh: Vachesthay le😌
+11/9/23, 3:59 PM - Srikanth: Isthe happy ne 😂
+11/9/23, 3:59 PM - Heshhhhhh: Veli butter veyu😏
+11/9/23, 4:00 PM - Vasundhara Reddy: Velli chadvukondi amma
+11/9/23, 7:35 PM - Srikanth: NLP MINOR 2.pdf (file attached)
+11/9/23, 7:36 PM - Heshhhhhh: Abhaa sai ram ee sari ee paper dhimpesthe entha baguntadoo
+11/9/23, 7:37 PM - Heshhhhhh: Neeku thumbs up ipistha srikanth
+11/9/23, 7:37 PM - Srikanth: 😂😂
+11/9/23, 11:00 PM - Heshhhhhh: https://www.youtube.com/watch?v=_0lnvU6lquQ
+11/10/23, 12:00 PM - Srikanth: DIP.docx (file attached)
+DIP
+11/14/23, 1:44 PM - Srikanth: import cv2
+import numpy as np
+
+def apply_prewitt(image):
+    kernel_x = np.array([[-1, 0, 1],
+                         [-1, 0, 1],
+                         [-1, 0, 1]])
+    kernel_y = np.array([[-1, -1, -1],
+                         [0, 0, 0],
+                         [1, 1, 1]])
+
+    gradient_x = cv2.filter2D(image, -1, kernel_x)
+    gradient_y = cv2.filter2D(image, -1, kernel_y)
+
+    gradient_magnitude = np.sqrt(gradient_x**2 + gradient_y**2)
+
+    # Normalize values to the range [0, 255]
+    gradient_magnitude = ((gradient_magnitude - gradient_magnitude.min()) /
+                          (gradient_magnitude.max() - gradient_magnitude.min()) * 255).astype(np.uint8)
+
+    return gradient_magnitude
+
+# Read the input image
+input_image = cv2.imread('sri.jpeg', cv2.IMREAD_GRAYSCALE)
+
+# Apply the Prewitt edge detection filter
+edge_prewitt = apply_prewitt(input_image)
+
+# Display the original and Prewitt-filtered images
+cv2.imshow('Original Image', input_image)
+cv2.imshow('Edge Detection (Prewitt)', edge_prewitt)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+11/14/23, 1:53 PM - Srikanth: import cv2
+import numpy as np
+
+def apply_sobel(image):
+    gradient_x = cv2.Sobel(image, cv2.CV_64F, 1, 0, ksize=3)
+    gradient_y = cv2.Sobel(image, cv2.CV_64F, 0, 1, ksize=3)
+
+    gradient_magnitude = np.sqrt(gradient_x**2 + gradient_y**2)
+
+    # Normalize values to the range [0, 255]
+    gradient_magnitude = ((gradient_magnitude - gradient_magnitude.min()) /
+                          (gradient_magnitude.max() - gradient_magnitude.min()) * 255).astype(np.uint8)
+
+    return gradient_magnitude
+
+# Read the input image
+input_image = cv2.imread('sri.jpeg', cv2.IMREAD_GRAYSCALE)
+
+# Apply the Sobel edge detection filter
+edge_sobel = apply_sobel(input_image)
+
+# Display the original and Sobel-filtered images
+cv2.imshow('Original Image', input_image)
+cv2.imshow('Edge Detection (Sobel)', edge_sobel)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+11/14/23, 1:58 PM - Srikanth: import cv2
+
+# Read the input image
+input_image = cv2.imread('input_image.jpg', cv2.IMREAD_GRAYSCALE)
+
+# Apply the Canny edge detection filter
+edges_canny = cv2.Canny(input_image, 100, 200)
+
+# Display the original and Canny-filtered images
+cv2.imshow('Original Image', input_image)
+cv2.imshow('Edge Detection (Canny)', edges_canny)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+11/14/23, 1:58 PM - Srikanth: import cv2
+import numpy as np
+
+def apply_roberts(image):
+    kernel_x = np.array([[1, 0],
+                         [0, -1]])
+    kernel_y = np.array([[0, 1],
+                         [-1, 0]])
+
+    gradient_x = cv2.filter2D(image, -1, kernel_x)
+    gradient_y = cv2.filter2D(image, -1, kernel_y)
+
+    gradient_magnitude = np.sqrt(gradient_x**2 + gradient_y**2)
+
+    # Normalize values to the range [0, 255]
+    gradient_magnitude = ((gradient_magnitude - gradient_magnitude.min()) /
+                          (gradient_magnitude.max() - gradient_magnitude.min()) * 255).astype(np.uint8)
+
+    return gradient_magnitude
+
+# Read the input image
+input_image = cv2.imread('sri.jpeg', cv2.IMREAD_GRAYSCALE)
+
+# Apply the Roberts Cross edge detection filter
+edges_roberts = apply_roberts(input_image)
+
+# Display the original and Roberts-filtered images
+cv2.imshow('Original Image', input_image)
+cv2.imshow('Edge Detection (Roberts)', edges_roberts)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+11/14/23, 2:01 PM - Abhishek MU: IMG-20231114-WA0004.jpg (file attached)
+11/14/23, 2:14 PM - Srikanth: import cv2
+import numpy as np
+
+# Reading the required image
+img = cv2.imread('sri.jpeg')
+
+# Convert the image to grayscale
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+# Apply edge detection using Canny
+edges = cv2.Canny(gray, 50, 150, apertureSize=3)
+
+# Use Hough Line Transform to detect lines
+lines = cv2.HoughLines(edges, 1, np.pi/180, 200)
+
+# Draw the detected lines on the original image
+for r_theta in lines:
+    arr = np.array(r_theta[0], dtype=np.float64)
+    r, theta = arr
+
+    a = np.cos(theta)
+    b = np.sin(theta)
+
+    x0 = a*r
+    y0 = b*r
+
+    x1 = int(x0 + 1000*(-b))
+    y1 = int(y0 + 1000*(a))
+    x2 = int(x0 - 1000*(-b))
+    y2 = int(y0 - 1000*(a))
+
+    cv2.line(img, (x1, y1), (x2, y2), (0, 0, 255), 2)
+
+# Display the result
+cv2.imshow('Detected Lines', img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+11/14/23, 2:21 PM - Heshhhhhh: import cv2
+import numpy as np
+
+input_image = cv2.imread(r'C:\Users\kumar_lf3uub3\Desktop\DIP_LAB\Photo.png', cv2.IMREAD_COLOR)
+
+gray_image = cv2.cvtColor(input_image, cv2.COLOR_BGR2GRAY)
+
+blurred_image = cv2.GaussianBlur(gray_image, (9, 9), 2)
+
+circles = cv2.HoughCircles(
+    blurred_image,
+    cv2.HOUGH_GRADIENT,
+    dp=1,
+    minDist=50,
+    param1=100,
+    param2=30,
+    minRadius=10,
+    maxRadius=200
+)
+
+if circles is not None:
+    circles = np.uint16(np.around(circles))
+    for i in circles[0, :]:
+        cv2.circle(input_image, (i[0], i[1]), i[2], (0, 255, 0), 2)
+        cv2.circle(input_image, (i[0], i[1]), 2, (0, 0, 255), 3)
+
+cv2.imshow('Original Image', input_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+11/20/23, 7:57 PM - Srikanth: DAA assignment
+11/20/23, 7:58 PM - Vasundhara Reddy: Send
+11/20/23, 7:58 PM - Srikanth: you need to send
+11/20/23, 7:58 PM - Vasundhara Reddy: IDK
+11/20/23, 7:59 PM - Srikanth: Map-Graph-Coloring.pdf (file attached)
+Map-Graph-Coloring
+11/20/23, 8:00 PM - Srikanth: ide anukunta
+11/20/23, 8:00 PM - Srikanth: raseyandi and submit chesaiyandi
+11/20/23, 8:01 PM - Vasundhara Reddy: Rey answer edi ra
+11/20/23, 8:02 PM - Srikanth: IMG-20231120-WA0057.jpg (file attached)
+11/20/23, 8:02 PM - Srikanth: Dani pai vi anni steps
+11/20/23, 8:03 PM - Vasundhara Reddy: Rasi pettu ra nuvvu
+11/20/23, 8:03 PM - Srikanth: Nuvvu nee daniki name rayaku raseka na name rasi naku pettai
+11/20/23, 8:03 PM - Vasundhara Reddy: Pehh
+11/20/23, 8:03 PM - Vasundhara Reddy: Em ardham katle naku
+11/20/23, 8:03 PM - Vasundhara Reddy: Em chestunnav nuvvu
+11/20/23, 8:04 PM - Srikanth: Waiting for u to send
+11/20/23, 8:04 PM - Vasundhara Reddy: Die
+11/20/23, 8:07 PM - Srikanth: DocScanner Nov 17, 2023 16-46_copy.pdf (file attached)
+DocScanner Nov 17, 2023 16-46_copy
+11/21/23, 2:27 PM - Srikanth: import cv2
+import numpy as np
+
+# Read the input image in grayscale
+input_image = cv2.imread('sribm.png', cv2.IMREAD_GRAYSCALE)
+
+# Apply GaussianBlur to reduce noise and improve contour detection
+blurred_image = cv2.GaussianBlur(input_image, (5, 5), 0)
+
+# Use adaptive thresholding to binarize the image
+_, binary_image = cv2.threshold(blurred_image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+
+# Find contours in the binary image
+contours, _ = cv2.findContours(binary_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+# Create an empty image for drawing contours
+contour_image = np.zeros_like(input_image)
+
+# Draw contours on the empty image
+cv2.drawContours(contour_image, contours, -1, (255, 255, 255), 2)
+
+# Display the original and contour images
+cv2.imshow('Original Image', input_image)
+cv2.imshow('Contour Image', contour_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+11/21/23, 2:27 PM - Srikanth: boundary Extraction
+11/21/23, 2:42 PM - Heshhhhhh: import cv2
+import numpy as np
+
+# Read the input grayscale image
+image = cv2.imread(r"C:\Users\kumar_lf3uub3\Downloads\DIP\DIP_LAB\Photo.png", cv2.IMREAD_GRAYSCALE)
+
+# Threshold the image to create a binary image
+_, binary_image = cv2.threshold(image, 128, 255, cv2.THRESH_BINARY)
+
+# Define the foreground and background structuring elements
+foreground_element = np.array([[0, 1, 0],
+                               [0, 1, 1],
+                               [0, 0, 0]], dtype=np.uint8)
+
+background_element = np.array([[1, 0, 1],
+                               [1, 0, 0],
+                               [1, 1, 1]], dtype=np.uint8)
+
+# Apply the hit-and-miss transform
+result_image = cv2.morphologyEx(binary_image, cv2.MORPH_HITMISS,
+                                 cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3)),
+                                 iterations=1)
+
+# Display the original binary image and the result of the hit-and-miss transform
+cv2.imshow('Binary Image', binary_image)
+cv2.imshow('Hit-and-Miss Transform Result', result_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+11/21/23, 2:43 PM - Heshhhhhh: import cv2
+import numpy as np
+
+# Read the input grayscale image
+image = cv2.imread(r"C:\Users\kumar_lf3uub3\Downloads\DIP\DIP_LAB\Photo.png", cv2.IMREAD_GRAYSCALE)
+
+# Threshold the grayscale image to create a binary image
+_, binary_image = cv2.threshold(image, 128, 255, cv2.THRESH_BINARY)
+
+# Invert the binary image (black to white and vice versa)
+inverted_image = cv2.bitwise_not(binary_image)
+
+# Find contours in the inverted image
+contours, _ = cv2.findContours(inverted_image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+# Create a mask to fill holes
+mask = np.zeros_like(inverted_image)
+
+# Draw contours on the mask
+cv2.drawContours(mask, contours, -1, (255, 255, 255), thickness=cv2.FILLED)
+
+# Invert the mask
+filled_mask = cv2.bitwise_not(mask)
+
+# Combine the original binary image and the filled mask
+result_image = cv2.bitwise_or(binary_image, filled_mask)
+
+# Display the original binary image and the result with filled holes
+cv2.imshow('Binary Image', binary_image)
+cv2.imshow('Result with Filled Holes', result_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+11/21/23, 2:43 PM - Heshhhhhh: import cv2
+import numpy as np
+
+# Read the input grayscale image
+image = cv2.imread(r"C:\Users\kumar_lf3uub3\Downloads\DIP\DIP_LAB\Photo.png", cv2.IMREAD_GRAYSCALE)
+
+# Threshold the grayscale image to create a binary image
+_, binary_image = cv2.threshold(image, 128, 255, cv2.THRESH_BINARY)
+
+# Define a structuring element for the morphological operations
+kernel = np.ones((3, 3), np.uint8)
+
+# Perform iterative morphological operations for skeletonization
+skeleton_image = binary_image.copy()
+for i in range(20):  # Adjust the number of iterations as needed
+    skeleton_image = cv2.erode(skeleton_image, kernel)
+
+# Display the original binary image and the skeletonized image
+cv2.imshow('Binary Image', binary_image)
+cv2.imshow('Skeletonized Image', skeleton_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+11/24/23, 9:35 PM - Srikanth: <Media omitted>
+SE21UARI087_Shashank_Mutyala_Java.pdf
+11/28/23, 1:53 PM - Abhishek MU: IMG-20231128-WA0001.jpg (file attached)
+DIP
+11/28/23, 1:57 PM - Heshhhhhh: What if we bribe or blackmail the invigilator and write code?
+11/28/23, 1:58 PM - Vasundhara Reddy: Vadu ni babai mari
+11/28/23, 1:58 PM - Srikanth: No blackmail direct 🔪
+11/28/23, 1:58 PM - Srikanth: Anduke 🩸
+11/28/23, 1:59 PM - Heshhhhhh: Srikanth veli mess lo sitting vesthadu
+11/28/23, 1:59 PM - Heshhhhhh: Set inla
+11/28/23, 2:00 PM - Srikanth: Mess ahh
+11/28/23, 2:00 PM - Heshhhhhh: Or we'll put getup as srikanth and gooo and put sitting
+11/28/23, 2:01 PM - Heshhhhhh: Someone get me a catterpillar I'll put it as my mustache
+11/28/23, 2:01 PM - Srikanth: 😂😂
+11/28/23, 2:01 PM - Srikanth: Direct attack no talking
+11/28/23, 2:54 PM - Abhishek MU: IMG-20231128-WA0013.jpg (file attached)
+Send codes for this
+11/28/23, 2:59 PM - Heshhhhhh: Ask the person sitting next to you and tholifying mosquitoes
+11/28/23, 3:02 PM - Abhishek MU: How's your french oral exam heyshika?
+11/28/23, 3:19 PM - Heshhhhhh: Very nice
+11/28/23, 3:19 PM - Heshhhhhh: Naku French radu ani French lo chepi vachesa
+11/28/23, 3:21 PM - Abhishek MU: Wowww..
+12/3/23, 3:43 PM - Heshhhhhh: import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+
+# Read the image
+image = cv2.imread(r"C:\Users\kumar_lf3uub3\Downloads\DIP\DIP_LAB\Photo.png", cv2.IMREAD_GRAYSCALE)
+
+# Apply FFT
+f = np.fft.fft2(image)
+fshift = np.fft.fftshift(f)
+
+# Compute magnitude spectrum
+magnitude_spectrum = 20 * np.log(np.abs(fshift))
+
+# Display original and magnitude spectrum images
+plt.subplot(121), plt.imshow(image, cmap='gray')
+plt.title('Input Image'), plt.xticks([]), plt.yticks([])
+plt.subplot(122), plt.imshow(magnitude_spectrum, cmap='gray')
+plt.title('Magnitude Spectrum'), plt.xticks([]), plt.yticks([])
+
+# Save the magnitude spectrum image
+cv2.imwrite('magnitude_spectrum_image.png', magnitude_spectrum)
+# Show the plots
+plt.show()
+12/3/23, 3:43 PM - Heshhhhhh: import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+
+# Read the image
+image = cv2.imread(r"C:\Users\kumar_lf3uub3\Downloads\DIP\DIP_LAB\Photo.png", cv2.IMREAD_GRAYSCALE)
+
+# Apply FFT
+f = np.fft.fft2(image)
+fshift = np.fft.fftshift(f)
+
+# Display original and FFT images
+plt.subplot(131), plt.imshow(image, cmap='gray')
+plt.title('Input Image'), plt.xticks([]), plt.yticks([])
+plt.subplot(132), plt.imshow(np.log(1 + np.abs(fshift)), cmap='gray')
+plt.title('FFT Image'), plt.xticks([]), plt.yticks([])
+
+# Apply IFFT to reconstruct the image
+ifft_shift = np.fft.ifftshift(fshift)
+image_reconstructed = np.fft.ifft2(ifft_shift)
+image_reconstructed = np.abs(image_reconstructed)
+
+# Display reconstructed image
+plt.subplot(133), plt.imshow(image_reconstructed, cmap='gray')
+plt.title('Reconstructed Image'), plt.xticks([]), plt.yticks([])
+
+# Show the plots
+plt.show()
+12/3/23, 3:44 PM - Heshhhhhh: import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+
+# Read the image
+image = cv2.imread(r"C:\Users\kumar_lf3uub3\Downloads\DIP\DIP_LAB\Photo.png", cv2.IMREAD_GRAYSCALE)
+
+# Apply FFT
+f = np.fft.fft2(image)
+fshift = np.fft.fftshift(f)
+
+# Compute magnitude spectrum
+magnitude_spectrum = 20 * np.log(np.abs(fshift))
+
+# Display original and magnitude spectrum images
+plt.subplot(131), plt.imshow(image, cmap='gray')
+plt.title('Input Image'), plt.xticks([]), plt.yticks([])
+plt.subplot(132), plt.imshow(magnitude_spectrum, cmap='gray')
+plt.title('Magnitude Spectrum'), plt.xticks([]), plt.yticks([])
+
+# Apply a low-pass filter
+rows, cols = image.shape
+crow, ccol = rows // 2, cols // 2
+
+# Create a mask for low-pass filtering (circle in this case)
+r = 30  # Adjust the radius for the low-pass filter
+mask_low_pass = np.zeros((rows, cols), dtype=np.uint8)
+cv2.circle(mask_low_pass, (ccol, crow), r, 1, -1)
+
+# Apply the mask to the frequency domain representation
+fshift_low_pass = fshift * mask_low_pass
+
+# Compute magnitude spectrum after low-pass filtering
+magnitude_spectrum_low_pass = 20 * np.log(np.abs(fshift_low_pass))
+
+# Reconstruct the low-pass filtered image
+f_ishift_low_pass = np.fft.ifftshift(fshift_low_pass)
+image_low_pass = np.fft.ifft2(f_ishift_low_pass)
+image_low_pass = np.abs(image_low_pass)
+
+
+# Display the original, low-pass filtered, and the difference images
+plt.subplot(131), plt.imshow(image, cmap='gray')
+plt.title('Original Image'), plt.xticks([]), plt.yticks([])
+plt.subplot(132), plt.imshow(image_low_pass, cmap='gray')
+plt.title('Low-Pass Filter'), plt.xticks([]), plt.yticks([])
+plt.subplot(133), plt.imshow(image - image_low_pass, cmap='gray')
+plt.title('Difference (Original - Low-Pass Filtered)'), plt.xticks([]), plt.yticks([])
+
+plt.show()
+12/3/23, 3:44 PM - Heshhhhhh: import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+
+# Read the image
+image = cv2.imread(r"C:\Users\kumar_lf3uub3\Downloads\DIP\DIP_LAB\Photo.png", cv2.IMREAD_GRAYSCALE)
+
+# Apply FFT
+f = np.fft.fft2(image)
+fshift = np.fft.fftshift(f)
+
+# Compute magnitude spectrum
+magnitude_spectrum = 20 * np.log(np.abs(fshift))
+
+# Display original and magnitude spectrum images
+plt.subplot(131), plt.imshow(image, cmap='gray')
+plt.title('Input Image'), plt.xticks([]), plt.yticks([])
+plt.subplot(132), plt.imshow(magnitude_spectrum, cmap='gray')
+plt.title('Magnitude Spectrum'), plt.xticks([]), plt.yticks([])
+
+# Apply a high-pass filter
+rows, cols = image.shape
+crow, ccol = rows // 2, cols // 2
+
+# Create a mask for high-pass filtering (circle in this case)
+r = 30  # Adjust the radius for the high-pass filter
+mask_high_pass = np.ones((rows, cols), dtype=np.uint8)
+cv2.circle(mask_high_pass, (ccol, crow), r, 0, -1)
+
+# Apply the mask to the frequency domain representation
+fshift_high_pass = fshift * mask_high_pass
+
+# Compute magnitude spectrum after high-pass filtering
+magnitude_spectrum_high_pass = 20 * np.log(np.abs(fshift_high_pass))
+
+# Reconstruct the high-pass filtered image
+f_ishift_high_pass = np.fft.ifftshift(fshift_high_pass)
+image_high_pass = np.fft.ifft2(f_ishift_high_pass)
+image_high_pass = np.abs(image_high_pass)
+
+# Display the original, high-pass filtered, and the difference images
+plt.subplot(131), plt.imshow(image, cmap='gray')
+plt.title('Original Image'), plt.xticks([]), plt.yticks([])
+plt.subplot(132), plt.imshow(image_high_pass, cmap='gray')
+plt.title('High-Pass Filter'), plt.xticks([]), plt.yticks([])
+plt.subplot(133), plt.imshow(image - image_high_pass, cmap='gray')
+plt.title('Difference (Original - High-Pass Filtered)'), plt.xticks([]), plt.yticks([])
+
+plt.show()
+12/7/23, 10:39 AM - Srikanth: IMG-20231207-WA0000.jpg (file attached)
+12/7/23, 10:39 AM - Srikanth: IMG-20231207-WA0001.jpg (file attached)
+12/7/23, 10:40 AM - Srikanth: IMG-20231207-WA0002.jpg (file attached)
+12/7/23, 10:41 AM - Srikanth: divide and conquer strategy
+12/7/23, 10:42 AM - Abhishek MU: Code?
+12/7/23, 10:43 AM - Srikanth: Code agigara?
+12/7/23, 10:44 AM - Abhishek MU: Algorithm
+12/7/23, 10:46 AM - Srikanth: IMG-20231207-WA0003.jpg (file attached)
+12/7/23, 10:47 AM - Srikanth: Eculid lo peetana?
+12/7/23, 10:49 AM - Abhishek MU: No
+12/7/23, 10:49 AM - Srikanth: ok ok
+12/7/23, 10:50 AM - Abhishek MU: Pseudo code pettu
+12/7/23, 10:51 AM - Srikanth: Rey rendu okate pseducode anna algo anna
+12/7/23, 10:51 AM - Srikanth: Ide ray
+12/7/23, 10:54 AM - Abhishek MU: Explqination
+12/7/23, 10:54 AM - Srikanth: ..
+12/7/23, 10:56 AM - Srikanth: IMG-20231207-WA0004.jpg (file attached)
+12/7/23, 10:56 AM - Srikanth: consised algo
+12/7/23, 2:11 PM - Srikanth: IMG-20231207-WA0006.jpg (file attached)
+12/7/23, 6:08 PM - Abhishek MU: IMG-20231207-WA0008.jpg (file attached)
+12/8/23, 7:57 PM - Srikanth: NLP MAJOR
+100 marks
+Section A (40 marks)
+20 marks - MCQs
+20 marks - small sentences 
+Section B (60 marks) 
+Answer any 4 questions out of 5 
+Each 15 marks
+12/8/23, 7:57 PM - Srikanth: DAA
+After minor 2: 45-50%
+12/8/23, 8:05 PM - Abhishek MU: Kaha se mili ye sab?
+12/8/23, 8:06 PM - Abhishek MU: Previous papers?
+12/8/23, 8:06 PM - Srikanth: Che che
+12/8/23, 8:06 PM - Srikanth: Classes ki velthe telustadi
+12/8/23, 8:07 PM - Abhishek MU: ok sir thanks for letting me know
+12/8/23, 8:07 PM - Heshhhhhh: Dip from histogram matching...
+12/8/23, 8:07 PM - Heshhhhhh: That's all ik
+12/8/23, 8:08 PM - Abhishek MU: DBMS total syllabus
+12/8/23, 9:04 PM - Vasundhara Reddy: osiH17E5o3Eeks8HKQgYOZj61JaSpkQiidcUlhPqAJs=.webp (file attached)
+12/8/23, 10:00 PM - Heshhhhhh: IMG-20231208-WA0004.jpg (file attached)
+Bangaram andi
+12/8/23, 10:01 PM - Srikanth: Yes yes🥹
+12/12/23, 11:48 AM - Abhishek MU: IMG-20231212-WA0000.jpg (file attached)
+12/13/23, 4:55 PM - Heshhhhhh: IMG-20231213-WA0009.jpg (file attached)
